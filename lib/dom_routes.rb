@@ -1,5 +1,12 @@
-require "dom_routes/version"
+require "dom_routes/view_helpers"
+require "dom_routes/controller"
 
 module DomRoutes
-  # Your code goes here...
+  if defined?(Rails) && defined?(Rails::Engine)
+    class Engine < ::Rails::Engine
+      initializer "dom_routes.view_helpers" do
+        ActionView::Base.send :include, ViewHelpers
+      end
+    end
+  end
 end

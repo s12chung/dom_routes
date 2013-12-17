@@ -7,9 +7,9 @@ Gem::Specification.new do |spec|
   spec.name          = "dom_routes"
   spec.version       = DomRoutes::VERSION
   spec.authors       = ["s12chung"]
-  spec.email         = ["steve.chung7@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.email         = ["steve@placemarkhq.com"]
+  spec.description   = %q{ Auto-magical scaffolding for Paul Irish's DOM-based Routing way of organizing your javascript. }
+  spec.summary       = %q{ Auto-magical scaffolding for Paul Irish's DOM-based Routing way of organizing your javascript. }
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -17,6 +17,8 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
+
+  spec.add_dependency 'rails', '>= 3.1'
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
