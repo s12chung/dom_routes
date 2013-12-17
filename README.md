@@ -125,8 +125,18 @@ DR.routes.demos.js.new({ log_message: "loggggggggggggg" });
 is called automatically.
 
 ## Advanced Use
+### Executing a different route
 Sometimes you want to execute a different route too. For that, you can define a template like so:
 ```ruby
 self.js_route = "demos/edit" # can be "demos#edit", "edit", { controller: "demos", action: "edit" }, or a DomRoutes::Route object
 ```
 When this is done, the original route and the new route will be executed.
+
+### Handling redirects with flash
+Other times you may want to use a route after a redirect, use #flash_js_route then.
+
+## Credits
+Extracted out of [Placemark](https://www.placemarkhq.com/). Originally called [poke_js](https://github.com/s12chung/poke_js).
+
+## Contribution
+Feel free to fork, post issues or send any pull requests. Thanks.
