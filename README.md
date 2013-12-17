@@ -125,4 +125,8 @@ DR.routes.demos.js.new({ log_message: "loggggggggggggg" });
 is called automatically.
 
 ## Advanced Use
-Sometimes you want to execute a different route.
+Sometimes you want to execute a different route too. For that, you can define a template like so:
+```ruby
+self.js_route = "demos/edit" # can be "demos#edit", "edit", { controller: "demos", action: "edit" }, or a DomRoutes::Route object
+```
+When this is done, the original route and the new route will be executed.

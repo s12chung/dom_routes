@@ -46,12 +46,18 @@ module DomRoutes
         if js_route.class == Route
           extracted_route = js_route
         elsif js_route.class.ancestors.include? Hash
-          extracted_route = HashWithIndifferentAccess.new(js_route)
+          hash = HashWithIndifferentAccess.new(js_route)
+          extracted_route.set hash[:controller], hash[:action]
         else
-          split = js_route.to_s.split('/')
+          js_route = js_route.to_s
+          controller = if js_route.index("#")
+                                 split = js_route.split('#')
+                                 [split.first]
+                               else
+                                 split = js_route.split('/')
+                                 split[0..-2]
+                               end
           extracted_route.action = split.last
-
-          controller = split[0..-2]
           unless controller.empty?
             extracted_route.controller_path = controller.join('/')
           end
