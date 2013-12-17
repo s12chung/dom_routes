@@ -1,4 +1,4 @@
-# PokeJs
+# DomRoutes
 Auto-magical scaffolding for
 [Paul Irish's DOM-based Routing](http://www.paulirish.com/2009/markup-based-unobtrusive-comprehensive-dom-ready-execution/)
 (or Garber-Irish Implementation) way of organizing your javascript.
@@ -57,9 +57,10 @@ Add this to your `app/assets/javascripts/application.js`
 Make sure your `app/views/layouts/application.html.erb` (and all your other layouts) looks like this:
 ```erb
 <html>
-<head>… <%= execute_js_routes %> …</head>
+<head>...</head>
 <body data-controller="<%= js_route.controller_path %>" data-action="<%= js_route.action %>">
     …
+    <%= execute_js_routes %>
 </body>
 </html>
 ```
