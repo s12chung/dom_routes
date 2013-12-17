@@ -9,7 +9,7 @@ Javascript is hard to organize and debugging ajax is a mess. This is one method 
 ## How it works
 ### Setup your namespace
 ```javascript
-APP = {
+DR.routes = {
 	all: {
 		html: {
 			before: function() {
@@ -58,16 +58,16 @@ Make sure your `app/views/layouts/application.html.erb` (and all your other layo
 ```erb
 <html>
 <head>… <%= execute_js_routes %> …</head>
-<body data-controller="<%= js_template.controller_path %>" data-action="<%= js_template.action %>">
+<body data-controller="<%= js_route.controller_path %>" data-action="<%= js_route.action %>">
     …
 </body>
 </html>
 ```
 
 ## Basic Use
-I like to have a JS file for every controller in `app/assets/javascripts/controllers`. Like so:
+I like to have a JS file for every route in `app/assets/javascripts/routes`. Like so:
 
-`app/assets/javascripts/controllers/demos.js`:
+`app/assets/javascripts/routes/demos.js`:
 ```javascript
 (function() {
 	var demos = DR.define('demos', {
@@ -126,7 +126,7 @@ is called automatically.
 
 ## Advanced Use
 ### Executing a different route
-Sometimes you want to execute a different route too. For that, you can define a template like so:
+Sometimes you want to execute a different route too. For that, you can specify it like so:
 ```ruby
 self.js_route = "demos/edit" # can be "demos#edit", "edit", { controller: "demos", action: "edit" }, or a DomRoutes::Route object
 ```
