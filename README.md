@@ -28,18 +28,18 @@ APP = {
 ```
 ### What happens
 After, requests to `demos#demo_action` with format `html` will call the following functions (if they exist):
-* `DOM_ROUTES.routes.all.html.before`
-* `DOM_ROUTES.routes.demos.html.before`
-* `DOM_ROUTES.routes.demos.html.demo_action` (with parameters if given)
-* `DOM_ROUTES.routes.demos.html.after`
-* `DOM_ROUTES.routes.all.html.after`
+* `DR.routes.all.html.before`
+* `DR.routes.demos.html.before`
+* `DR.routes.demos.html.demo_action` (with parameters if given)
+* `DR.routes.demos.html.after`
+* `DR.routes.all.html.after`
 
 `js` format is also supported, i.e.:
-* `DOM_ROUTES.routes.all.js.before`
-* `DOM_ROUTES.routes.demos.js.before`
-* `DOM_ROUTES.routes.demos.js.demo_action` (with parameters if given)
-* `DOM_ROUTES.routes.demos.js.after`
-* `DOM_ROUTES.routes.all.js.after`
+* `DR.routes.all.js.before`
+* `DR.routes.demos.js.before`
+* `DR.routes.demos.js.demo_action` (with parameters if given)
+* `DR.routes.demos.js.after`
+* `DR.routes.all.js.after`
 
 ## Installation
 Add this line to your application's `Gemfile`:
@@ -70,7 +70,7 @@ I like to have a JS file for every controller in `app/assets/javascripts/control
 `app/assets/javascripts/controllers/demos.js`:
 ```javascript
 (function() {
-	var demos = DOM_ROUTES.define('demos', {
+	var demos = DR.define('demos', {
 		html: {
 			edit: function(params) {
 				alert(params.alert_message);
@@ -86,18 +86,18 @@ I like to have a JS file for every controller in `app/assets/javascripts/control
 })();
 ```
 
-`DOM_ROUTES.define()` extends or creates the namespace `DOM_ROUTES.demos`
-and returns it. This allows me to access `DOM_ROUTES.demos` through
+`DR.define()` extends or creates the namespace `DR.demos`
+and returns it. This allows me to access `DR.demos` through
 the `demos` variable.
 
 You can also use the traditional hash
 namespacing shown in the [Setup your namespace](https://github.com/s12chung/dom_routes#setup-your-namespace) section.
 
 ### HTML
-So if a `html` request is sent to `demos#edit`, `DOM_ROUTES.routes.demos.html.edit` is called with the HTML view rendering.
+So if a `html` request is sent to `demos#edit`, `DR.routes.demos.html.edit` is called with the HTML view rendering.
 
 ### Javascript
-For a `js` request sent to `demos#new`, `DOM_ROUTES.routes.demos.js.new` is called and nothing else happens.
+For a `js` request sent to `demos#new`, `DR.routes.demos.js.new` is called and nothing else happens.
 
 ### Passing parameters
 __Optional__ Parameters are passed from a JSON DSL (such as [jbuilder](https://github.com/rails/jbuilder/)) and is passed as the `params` object to the function. You can pass any JSON object.
@@ -109,7 +109,7 @@ json.alert_message "ploop"
 ```
 so 
 ```javascript
-DOM_ROUTES.routes.demos.html.edit({ alert_message: "ploop" });
+DR.routes.demos.html.edit({ alert_message: "ploop" });
 ```
 is called automatically.
 
@@ -120,7 +120,7 @@ json.log_message "loggggggggggggg"
 ```
 so
 ```javascript
-DOM_ROUTES.routes.demos.js.new({ log_message: "loggggggggggggg" });
+DR.routes.demos.js.new({ log_message: "loggggggggggggg" });
 ```
 is called automatically.
 

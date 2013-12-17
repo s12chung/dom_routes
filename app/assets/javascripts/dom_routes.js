@@ -1,15 +1,15 @@
-DOM_ROUTES = {
-    namespace_prefix: "DOM_ROUTES.routes",
+DR = {
+    namespace_prefix: "DR.routes",
     blank: function(o) {
         return typeof o === "undefined" || o === null;
     },
     namespace_string: function(namespace_string) {
-        return DOM_ROUTES.namespace_prefix + "." + namespace_string;
+        return DR.namespace_prefix + "." + namespace_string;
     },
     get_or_create: function(namespace_string) {
         var current_namepace = window;
         $.each(namespace_string.split('.'), function(index, level) {
-            if (DOM_ROUTES.blank(current_namepace[level]))
+            if (DR.blank(current_namepace[level]))
                 current_namepace[level] = {};
             current_namepace = current_namepace[level];
         });
@@ -17,17 +17,17 @@ DOM_ROUTES = {
         return current_namepace;
     },
     define: function(namespace_string, definition) {
-        namespace_string = DOM_ROUTES.namespace_string(namespace_string);
-        return DOM_ROUTES.define_namespace(namespace_string, definition);
+        namespace_string = DR.namespace_string(namespace_string);
+        return DR.define_namespace(namespace_string, definition);
     },
     define_namespace: function(namespace_string, definition) {
-        var found_namespace = DOM_ROUTES.get_or_create(namespace_string);
+        var found_namespace = DR.get_or_create(namespace_string);
         return $.extend(found_namespace, definition);
     },
 
     traverse_namespace: function(namespace, levels) {
         if (!$.isArray(levels)) levels = [levels.controller, levels.format, levels.action];
-        levels = DOM_ROUTES.formatted_levels(levels);
+        levels = DR.formatted_levels(levels);
 
         var current_level = namespace;
         var level;
@@ -57,15 +57,15 @@ DOM_ROUTES = {
     },
 
     exec_all: function(params) {
-        DOM_ROUTES.exec("application", params.format, "before", params);
-        DOM_ROUTES.exec(params.controller, params.format, "before", params);
-        DOM_ROUTES.exec("application", params.format, params.action, params);
-        DOM_ROUTES.exec(params.controller, params.format, params.action, params);
-        DOM_ROUTES.exec(params.controller, params.format, "after", params);
-        DOM_ROUTES.exec("application", params.format, "after", params);
+        DR.exec("application", params.format, "before", params);
+        DR.exec(params.controller, params.format, "before", params);
+        DR.exec("application", params.format, params.action, params);
+        DR.exec(params.controller, params.format, params.action, params);
+        DR.exec(params.controller, params.format, "after", params);
+        DR.exec("application", params.format, "after", params);
     },
     exec: function(controller, format, action, params) {
-        var action_namespace = DOM_ROUTES.traverse_namespace(DOM_ROUTES.routes, [controller, format, action]);
+        var action_namespace = DR.traverse_namespace(DR.routes, [controller, format, action]);
         if ($.isFunction(action_namespace)) action_namespace(params);
     }
 };

@@ -1,5 +1,5 @@
 (function() {
-    DOM_ROUTES.create_namespace('<%= js_params_namespace %>');
+    DR.create_namespace('<%= js_params_namespace %>');
     <%= js_params_namespace %> = <%= js_params_value { yield } %>;
-    DOM_ROUTES.exec_all(<%= js_params_namespace %>);
+    DR.exec_all(<%= js_params_namespace %>);
 })();

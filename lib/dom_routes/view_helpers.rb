@@ -18,7 +18,7 @@ module DomRoutes
     end
 
     def js_params_namespace(js_route=self.js_route)
-      raw "DOM_ROUTES.routes.#{js_route.controller_namespace}.#{formats.first}.#{js_route.action}_params"
+      raw "DR.routes.#{js_route.controller_namespace}.#{formats.first}.#{js_route.action}_params"
     end
 
     def js_params_value(js_route=self.js_route)
@@ -47,7 +47,7 @@ module DomRoutes
         if format == :html
           javascript_tag do
             raw %Q/
-                DOM_ROUTES.create_namespace('#{js_params_namespace}');
+                DR.create_namespace('#{js_params_namespace}');
                 #{js_params_namespace} = #{ js_params_value do
                   with_format :js do
                     if lookup_context.template_exists? "#{controller_path}/#{action}_params"
@@ -57,14 +57,14 @@ module DomRoutes
                 end };
                 #{
             if is_flash_js_route?
-              %Q/$(function() { DOM_ROUTES.exec_all(#{js_params_namespace}); });/
+              %Q/$(function() { DR.exec_all(#{js_params_namespace}); });/
             else
               %Q/
-                    DOM_ROUTES.define_namespace('DOM_ROUTES.routes', {
+                    DR.define_namespace('DR.routes', {
                         params: #{js_params_namespace},
-                        init: function() { DOM_ROUTES.exec_all(DOM_ROUTES.routes.params); },
+                        init: function() { DR.exec_all(DR.routes.params); },
                     });
-                    $(DOM_ROUTES.routes.init);
+                    $(DR.routes.init);
                   /
             end
             }
