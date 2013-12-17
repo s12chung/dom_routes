@@ -86,17 +86,13 @@ I like to have a JS file for every route in `app/assets/javascripts/routes`. Lik
 })();
 ```
 
-`DR.define()` extends or creates the namespace `DR.demos`
-and returns it. This allows me to access `DR.demos` through
-the `demos` variable.
-
-You can also use the traditional hash
+`DR.define()` extends or creates the namespace `DR.routes.demos`
+and returns it. This allows me to access `DR.routes.demos` through
+the `demos` variable. You can also use the traditional hash
 namespacing shown in the [Setup your namespace](https://github.com/s12chung/dom_routes#setup-your-namespace) section.
 
-### HTML
 So if a `html` request is sent to `demos#edit`, `DR.routes.demos.html.edit` is called with the HTML view rendering.
 
-### Javascript
 For a `js` request sent to `demos#new`, `DR.routes.demos.js.new` is called and nothing else happens.
 
 ### Passing parameters
@@ -125,6 +121,9 @@ DR.routes.demos.js.new({ log_message: "loggggggggggggg" });
 is called automatically.
 
 ## Advanced Use
+### Manually execute a route
+Use `#execute_js_route(js_route=self.js_route, format=formats.first)`
+
 ### Executing a different route
 Sometimes you want to execute a different route too. For that, you can specify it like so:
 ```ruby
@@ -133,7 +132,7 @@ self.js_route = "demos/edit" # can be "demos#edit", "edit", { controller: "demos
 When this is done, the original route and the new route will be executed.
 
 ### Handling redirects with flash
-Other times you may want to use a route after a redirect, use #flash_js_route then.
+Other times you may want to use a route after a redirect, use `#flash_js_route(js_route=nil)` then.
 
 ## Credits
 Extracted out of [Placemark](https://www.placemarkhq.com/). Originally called [poke_js](https://github.com/s12chung/poke_js).
