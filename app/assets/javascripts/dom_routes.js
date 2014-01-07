@@ -22,7 +22,7 @@ DR = {
     },
     define_namespace: function(namespace_string, definition) {
         var found_namespace = DR.get_or_create(namespace_string);
-        return $.extend(found_namespace, definition);
+        return $.extend(true, found_namespace, definition);
     },
 
     traverse_namespace: function(namespace, levels) {
