@@ -3,6 +3,8 @@ Auto-magical scaffolding for
 [Paul Irish's DOM-based Routing](http://www.paulirish.com/2009/markup-based-unobtrusive-comprehensive-dom-ready-execution/)
 (or Garber-Irish Implementation) way of organizing your javascript.
 
+__Works with turbolinks__
+
 ## Purpose
 Javascript is hard to organize and debugging ajax is a mess. This is one method to organizing your javascript neatly by mirroring the controllers and having all the it outside of your HTML views.
 
@@ -28,18 +30,20 @@ DR.routes = {
 ```
 ### What happens
 After, requests to `demos#demo_action` with format `html` will call the following functions (if they exist):
-* `DR.routes.all.html.before`
+* `DR.routes.application.html.before`
 * `DR.routes.demos.html.before`
-* `DR.routes.demos.html.demo_action` (with parameters if given)
+* `DR.routes.application.html.demo_action`
+* `DR.routes.demos.html.demo_action`
 * `DR.routes.demos.html.after`
-* `DR.routes.all.html.after`
+* `DR.routes.application.html.after`
 
 `js` format is also supported, i.e.:
-* `DR.routes.all.js.before`
+* `DR.routes.application.js.before`
 * `DR.routes.demos.js.before`
-* `DR.routes.demos.js.demo_action` (with parameters if given)
+* `DR.routes.application.js.demo_action`
+* `DR.routes.demos.js.demo_action`
 * `DR.routes.demos.js.after`
-* `DR.routes.all.js.after`
+* `DR.routes.application.js.after`
 
 ## Installation
 Add this line to your application's `Gemfile`:
@@ -96,8 +100,10 @@ So if a `html` request is sent to `demos#edit`, `DR.routes.demos.html.edit` is c
 
 For a `js` request sent to `demos#new`, `DR.routes.demos.js.new` is called and nothing else happens.
 
-### Passing parameters
-__Optional__ Parameters are passed from a JSON DSL (such as [jbuilder](https://github.com/rails/jbuilder/)) and is passed as the `params` object to the function. You can pass any JSON object.
+### Templates and parameters
+__Optional__ Parameters are passed from a JSON DSL (such as [jbuilder](https://github.com/rails/jbuilder/))
+and is passed as the `params` object to the function.
+You can pass any JSON object as a template.
 
 #### HTML
 `app/views/demos/edit_params.js.jbuilder`:
@@ -111,6 +117,7 @@ DR.routes.demos.html.edit({ alert_message: "ploop" });
 is called automatically.
 
 #### Javascript
+For javascript to work, a template must exist.
 `app/views/demos/new.js.jbuilder`:
 ```ruby
 json.log_message "loggggggggggggg"
