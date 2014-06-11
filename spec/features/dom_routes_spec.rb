@@ -5,7 +5,7 @@ feature 'invoke correct dom route', :js => true do
     action = @parameters ? "with_parameters" : "index"
 
     filters = %W[before #{action} after].map do |filter|
-      ["application.#{filter}", "#{controller_namespace}.#{filter}"]
+      ["application.html.#{filter}", "#{controller_namespace}.html.#{filter}"]
     end.flatten
     filters[-1], filters[-2] = filters[-2], filters[-1]
     filters
@@ -14,7 +14,7 @@ feature 'invoke correct dom route', :js => true do
   def test_elements(filters)
     within '#test_append' do
       all('div').zip(filters).each do |div, filter|
-        div[:class].should == filter
+        div[:filter].should == filter
 
         if @parameters
           div.text.should == "params_test"

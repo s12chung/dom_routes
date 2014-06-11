@@ -9,7 +9,6 @@ module BaseController
     render_users
   end
   def with_parameters
-    render_users
   end
 
   protected
