@@ -18,6 +18,9 @@ create_routes = function(controller_namespace) {
             index: function(params) {
                 test_append(controller_namespace + ".index", params);
             },
+            with_parameters: function(params) {
+                test_append(controller_namespace + ".with_parameters", params);
+            },
             after: function(params) {
                 test_append(controller_namespace + ".after", params);
             }

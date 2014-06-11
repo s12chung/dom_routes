@@ -3,6 +3,7 @@ require 'action_controller/railtie'
 require 'action_view/railtie'
 require "sprockets/railtie"
 
+require 'jbuilder'
 require 'dom_routes'
 
 module FakeApp
@@ -24,3 +25,4 @@ end
 %w[controllers helpers].each do |file|
   require "fake_app/app/#{file}"
 end
+ActionView::Base.send :include, ApplicationHelper
