@@ -6,6 +6,12 @@ class UsersController < ApplicationController
   def index
   end
 end
+module Dashboard
+  class UsersController < ApplicationController
+    def index
+    end
+  end
+end
 class AdminsController < UsersController
   def index
   end
