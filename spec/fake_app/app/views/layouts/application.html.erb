@@ -1,7 +1,10 @@
 <html>
 <head>
+  <%= javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" %>
+  <%= javascript_include_tag "application" %>
 </head>
-<body>
+<body data-controller="<%= js_route.controller_path %>" data-action="<%= js_route.action %>">
 <%= yield %>
+<%= execute_js_routes %>
 </body>
 </html>

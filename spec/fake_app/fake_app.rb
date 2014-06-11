@@ -1,6 +1,9 @@
 require 'rails'
 require 'action_controller/railtie'
 require 'action_view/railtie'
+require "sprockets/railtie"
+
+require 'dom_routes'
 
 module FakeApp
   class Application < Rails::Application
@@ -8,6 +11,8 @@ module FakeApp
     config.session_store :cookie_store, :key => 'session_store'
     config.active_support.deprecation = :log
     config.eager_load = false
+
+    config.root = File.dirname(__FILE__)
   end
 end
 FakeApp::Application.initialize!
