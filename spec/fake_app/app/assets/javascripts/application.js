@@ -1,3 +1,4 @@
+//= require jquery_ujs
 //= require dom_routes
 //= require_self
 //= require_tree .
@@ -13,6 +14,7 @@ create_routes = function(controller_namespace) {
     var test = function(filter, params) {
         test_append(controller_namespace, filter, params);
     };
+
     DR.define(controller_namespace, {
         html: {
             before: function(params) {
@@ -32,8 +34,8 @@ create_routes = function(controller_namespace) {
             before: function(params) {
                 test("before", params);
             },
-            index: function(params) {
-                test("index", params);
+            with_parameters: function(params) {
+                test("with_parameters", params);
             },
             after: function(params) {
                 test("after", params);

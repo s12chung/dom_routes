@@ -4,6 +4,7 @@ require 'action_view/railtie'
 require "sprockets/railtie"
 
 require 'jbuilder'
+require 'jquery-rails'
 require 'dom_routes'
 
 module FakeApp

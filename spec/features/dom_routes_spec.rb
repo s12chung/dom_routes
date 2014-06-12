@@ -1,14 +1,19 @@
 require 'spec_helper'
 
 feature 'invoke correct dom route', :js => true do
-  def filters(controller_namespace)
+  def filters(controller_namespace, js=false)
     action = @parameters ? "with_parameters" : "index"
 
-    filters = %W[before #{action} after].map do |filter|
-      ["application.html.#{filter}", "#{controller_namespace}.html.#{filter}"]
+    formats = %w[html]
+    if js; formats += %w[js] end
+
+    formats.map do |format|
+      format_filters = %W[before #{action} after].map do |filter|
+        ["application.#{format}.#{filter}", "#{controller_namespace}.#{format}.#{filter}"]
+      end.flatten
+      format_filters[-1], format_filters[-2] = format_filters[-2], format_filters[-1]
+      format_filters
     end.flatten
-    filters[-1], filters[-2] = filters[-2], filters[-1]
-    filters
   end
 
   def test_elements(filters)
@@ -28,12 +33,12 @@ feature 'invoke correct dom route', :js => true do
   end
 
   shared_examples "dom route controllers" do
-    scenario 'basic controller' do
+    scenario 'with basic controller' do
       visit generate_path('/users')
       test_elements filters('users')
     end
 
-    scenario 'namespaced controller' do
+    scenario 'with namespaced controller' do
       visit generate_path('/dashboard/users')
       test_elements filters('dashboard.users')
     end
@@ -51,5 +56,11 @@ feature 'invoke correct dom route', :js => true do
       @parameters = true
     end
     it_should_behave_like "dom route controllers"
+
+    scenario 'with ajax' do
+      visit '/users/with_parameters'
+      click_link "ajax_link"
+      test_elements filters('users', true)
+    end
   end
 end
