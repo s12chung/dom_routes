@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "capybara-webkit"
-  spec.add_development_dependency "rspec-rails"
+  spec.add_development_dependency "rspec-rails", "~> 2.14.0"
   spec.add_development_dependency "jbuilder"
   spec.add_development_dependency "jquery-rails"
   spec.add_development_dependency "rake"
