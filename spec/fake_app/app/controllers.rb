@@ -26,6 +26,11 @@ class UsersController < ApplicationController
   def different_route
     self.js_route = "users/index"
   end
+
+  def redirect
+    flash_js_route
+    redirect_to users_path
+  end
 end
 module Dashboard
   class UsersController < ApplicationController

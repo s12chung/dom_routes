@@ -4,6 +4,7 @@ FakeApp::Application.routes.draw do
       get :with_parameters
       get :manually_execute
       get :different_route
+      get :redirect
     end
   end
 

@@ -32,6 +32,9 @@ create_routes = function(controller_namespace) {
             different_route: function(params) {
                 test("different_route", params);
             },
+            redirect: function(params) {
+                test("redirect", params);
+            },
             after: function(params) {
                 test("after", params);
             }
