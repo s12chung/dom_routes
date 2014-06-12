@@ -26,6 +26,9 @@ create_routes = function(controller_namespace) {
             with_parameters: function(params) {
                 test("with_parameters", params);
             },
+            manually_execute: function(params) {
+                test("manually_execute", params);
+            },
             after: function(params) {
                 test("after", params);
             }

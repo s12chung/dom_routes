@@ -19,15 +19,12 @@ end
 
 class UsersController < ApplicationController
   include BaseController
+
+  def manually_execute
+  end
 end
 module Dashboard
   class UsersController < ApplicationController
     include BaseController
   end
-end
-class AdminsController < UsersController
-  include BaseController
-end
-class ArtistsController < UsersController
-  include BaseController
 end

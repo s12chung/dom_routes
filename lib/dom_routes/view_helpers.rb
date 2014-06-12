@@ -42,6 +42,7 @@ module DomRoutes
     end
 
     def execute_js_route(js_route=self.js_route, format=formats.first)
+      js_route = extract_js_route(js_route)
       controller_path, action = js_route.parts
       lambda = -> do
         if format == :html
@@ -61,10 +62,9 @@ module DomRoutes
             else
               %Q/
                     DR.define_namespace('DR.routes', {
-                        params: #{js_params_namespace},
-                        init: function() { DR.exec_all(DR.routes.params); },
+                        params: #{js_params_namespace}
                     });
-                    $(DR.routes.init);
+                    $(function() { DR.exec_all(#{js_params_namespace}); });
                   /
             end
             }
