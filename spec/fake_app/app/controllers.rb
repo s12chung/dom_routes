@@ -22,6 +22,10 @@ class UsersController < ApplicationController
 
   def manually_execute
   end
+
+  def different_route
+    self.js_route = "users/index"
+  end
 end
 module Dashboard
   class UsersController < ApplicationController

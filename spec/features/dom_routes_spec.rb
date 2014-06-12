@@ -46,6 +46,11 @@ feature 'invoke correct dom route', :js => true do
       visit '/users/manually_execute'
       test_elements (filters('users', "index") + filters('users', 'manually_execute'))
     end
+
+    scenario "with different route" do
+      visit '/users/different_route'
+      test_elements (filters('users', "index") + filters('users', 'different_route'))
+    end
   end
 
   context 'with parameters' do

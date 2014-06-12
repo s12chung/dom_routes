@@ -3,6 +3,7 @@ FakeApp::Application.routes.draw do
     collection do
       get :with_parameters
       get :manually_execute
+      get :different_route
     end
   end
 
