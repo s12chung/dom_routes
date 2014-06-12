@@ -54,7 +54,6 @@ feature 'invoke correct dom route', :js => true do
 
     scenario "with redirect" do
       visit '/users/redirect'
-      puts page.html
       test_elements (filters('users', 'redirect') + filters('users', "index"))
     end
   end
